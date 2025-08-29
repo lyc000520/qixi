@@ -1,1 +1,334 @@
-你好
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>七夕情人节 - 浪漫之夜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            margin-bottom: 50px;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            to {
+                text-shadow: 2px 2px 20px #ff69b4, 2px 2px 30px #ff1493;
+            }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #f0f8ff;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .heart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .heart {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            position: relative;
+            transform: rotate(45deg);
+            animation: heartbeat 1.5s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: -50px;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: rotate(45deg) scale(1); }
+            50% { transform: rotate(45deg) scale(1.1); }
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            font-size: 1.3rem;
+            color: #fff;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .poem {
+            font-style: italic;
+            color: #f0f8ff;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            line-height: 2;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff69b4;
+            animation: float 6s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .footer {
+            margin-top: 60px;
+            color: #f0f8ff;
+            opacity: 0.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .heart {
+                width: 80px;
+                height: 80px;
+            }
+            .heart::before,
+            .heart::after {
+                width: 80px;
+                height: 80px;
+            }
+            .heart::before {
+                top: -40px;
+            }
+            .heart::after {
+                left: -40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="title">七夕情人节</h1>
+            <p class="subtitle">愿有情人终成眷属，愿天下有情人幸福美满</p>
+        </div>
+
+        <div class="heart-container">
+            <div class="heart"></div>
+            <div class="heart" style="animation-delay: 0.5s;"></div>
+            <div class="heart" style="animation-delay: 1s;"></div>
+        </div>
+
+        <div class="message-box">
+            <p class="message">
+                七夕佳节，牛郎织女鹊桥相会，诉说着千年不变的爱情传说。
+                在这个浪漫的日子里，愿每一对相爱的人都能珍惜彼此，携手共度美好时光。
+            </p>
+            
+            <div class="poem">
+                "纤云弄巧，飞星传恨，银汉迢迢暗度。<br>
+                金风玉露一相逢，便胜却人间无数。<br>
+                柔情似水，佳期如梦，忍顾鹊桥归路。<br>
+                两情若是久长时，又岂在朝朝暮暮。"
+            </div>
+            
+            <p class="message">
+                愿我们的爱情如牛郎织女般坚贞不渝，如银河般璀璨永恒。
+                愿每一个七夕，都能与你相伴，共同书写属于我们的浪漫故事。
+            </p>
+        </div>
+
+        <div class="heart-container">
+            <div class="heart" style="animation-delay: 0.3s;"></div>
+            <div class="heart" style="animation-delay: 0.8s;"></div>
+            <div class="heart" style="animation-delay: 1.3s;"></div>
+        </div>
+
+        <div class="footer">
+            <p>❤️ 七夕快乐 ❤️</p>
+            <p>愿天下有情人终成眷属</p>
+        </div>
+    </div>
+
+    <script>
+        // 创建星星背景
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // 创建飘落的爱心
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('floatingHearts');
+            const heartCount = 20;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('load', function() {
+            createStars();
+            createFloatingHearts();
+        });
+
+        // 添加鼠标移动效果
+        document.addEventListener('mousemove', function(e) {
+            const hearts = document.querySelectorAll('.floating-heart');
+            hearts.forEach((heart, index) => {
+                if (index % 3 === 0) {
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
+                    heart.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
